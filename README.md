@@ -5,3 +5,5 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 * Centered layout
 * No gutter
 * But with tabs, tree-view etc.
+
+Works automatically with Markdown.
