@@ -1,33 +1,35 @@
-TypewriterView = require './typewriter-view'
-{CompositeDisposable} = require 'atom'
+$ = require 'jquery'
 
-module.exports = Typewriter =
-  typewriterView: null
-  modalPanel: null
-  subscriptions: null
-
+module.exports =
   activate: (state) ->
-    @typewriterView = new TypewriterView(state.typewriterViewState)
-    @modalPanel = atom.workspace.addModalPanel(item: @typewriterView.getElement(), visible: false)
+    atom.config.set('editor.softWrap', true)
 
-    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
-    @subscriptions = new CompositeDisposable
+    writerMode = () ->
+      editor = atom.workspace.getActiveTextEditor()
+      width = atom.config.get 'editor.preferredLineLength'
 
-    # Register command that toggles this view
-    @subscriptions.add atom.commands.add 'atom-workspace', 'typewriter:toggle': => @toggle()
+      if editor isnt undefined # e.g. settings-view
+        $('[data-grammar="source gfm"] /deep/ .editor--private').css 'max-width', editor.getDefaultCharWidth() * width
 
-  deactivate: ->
-    @modalPanel.destroy()
-    @subscriptions.dispose()
-    @typewriterView.destroy()
+    requestAnimationFrame ->
+      writerMode()
 
-  serialize: ->
-    typewriterViewState: @typewriterView.serialize()
+    # Listen config changes
+    @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
+      requestAnimationFrame ->
+        writerMode()
 
-  toggle: ->
-    console.log 'Typewriter was toggled!'
+    @widthChanged = atom.config.onDidChange 'editor.preferredLineLength', ->
+      requestAnimationFrame ->
+        writerMode()
 
-    if @modalPanel.isVisible()
-      @modalPanel.hide()
-    else
-      @modalPanel.show()
+    # And to tab switching, opening files, etc.
+    @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+      requestAnimationFrame ->
+        writerMode()
+
+
+  deactivate: (state) ->
+    @fontChanged?.dispose()
+    @widthChanged?.dispose()
+    @paneChanged?.dispose()
