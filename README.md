@@ -1,5 +1,7 @@
 # typewriter package
 
-A short description of your package.
+Like a miniature version of [Zen](https://atom.io/packages/zen), this package improves the writing experience in Atom:
 
-![A screenshot of your package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
+* Centered layout
+* No gutter
+* But with tabs, tree-view etc.
