@@ -1,4 +1,4 @@
-# typewriter package
+# typewriter
 
 Like a miniature version of [Zen](https://atom.io/packages/zen), this package improves the writing experience in Atom:
 
@@ -7,3 +7,5 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 * But with tabs, tree-view etc.
 
 Works automatically with Markdown.
+
+![](https://raw.githubusercontent.com/braver/typewriter/master/resources/screenshot.png)
