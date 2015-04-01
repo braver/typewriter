@@ -2,15 +2,19 @@
   "name": "typewriter",
   "main": "./lib/typewriter",
   "version": "0.0.0",
-  "description": "A short description of your package",
-  "activationCommands": {
-    "atom-workspace": "typewriter:toggle"
-  },
-  "repository": "https://github.com/atom/typewriter",
+  "description": "A better writing layout for Atom",
+  "repository": "https://github.com/braver/typewriter",
   "license": "MIT",
   "engines": {
     "atom": ">=0.174.0 <2.0.0"
   },
   "dependencies": {
-  }
+    "jquery": "2.x.x"
+  },
+  "keywords": [
+    "writing",
+    "markdown",
+    "zen",
+    "distraction free"
+  ]
 }
