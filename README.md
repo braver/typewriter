@@ -4,6 +4,7 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 
 * Centered layout
 * No gutter
+* No scrollbar (unless you hover over the editor)
 * But with tabs, tree-view etc.
 * Enables soft-wrapping*
 
