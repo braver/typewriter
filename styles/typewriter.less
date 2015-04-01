@@ -1,26 +1,20 @@
 @import "syntax-variables";
 
 [data-grammar="source gfm"]::shadow {
-    .gutter {
-        display: none;
+  .gutter {
+    display: none;
+  }
+  .atom-text-editor {
+    background: @syntax-background-color;
+  }
+  .editor--private {
+    margin: 0 auto;
+    .vertical-scrollbar {
+      opacity: 0;
+      transition: opacity .2s .1s;
     }
-    .atom-text-editor {
-        background: @syntax-background-color;
+    &:hover .vertical-scrollbar {
+      opacity: 1;
     }
-    .editor--private {
-        margin: 0 auto;
-        .vertical-scrollbar {
-            opacity: 0;
-            transition: opacity .2s .1s;
-        }
-        &:hover .vertical-scrollbar {
-            opacity: 1;
-        }
-        z-index: 0;
-    }
-    atom-text-editor-minimap {
-        position: absolute;
-        right: 0;
-        z-index: 1;
-    }
+  }
 }
