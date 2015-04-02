@@ -1,11 +1,24 @@
 module.exports =
-  activate: (state) ->
-    # code in separate file so deferral keeps activation time down
-    atom.themes.onDidChangeActiveThemes ->
-      Run = require './run'
-      Run.run()
 
-    deactivate: (state) ->
-      @fontChanged?.dispose()
-      @widthChanged?.dispose()
-      @paneChanged?.dispose()
+  activate: (state) ->
+    Run = require './run'
+    Run.run()
+
+    # Listen config changes
+    @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
+      requestAnimationFrame ->
+        Run.run()
+
+    @widthChanged = atom.config.onDidChange 'editor.preferredLineLength', ->
+      requestAnimationFrame ->
+        Run.run()
+
+    # And to tab switching, opening files, etc.
+    @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+      requestAnimationFrame ->
+        Run.run()
+
+  deactivate: (state) ->
+    @fontChanged?.dispose()
+    @widthChanged?.dispose()
+    @paneChanged?.dispose()
