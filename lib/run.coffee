@@ -1,25 +1,27 @@
-$ = require 'jquery'
-
 module.exports =
 
   start: () ->
 
-    atom.config.set('.gfm.source', 'editor.softWrap', true)
-    atom.config.set('.html.mediawiki.text', 'editor.softWrap', true)
-
     editor = atom.workspace.getActiveTextEditor()
 
-    if editor isnt undefined # e.g. settings-view
-      console.log editor.getRootScopeDescriptor().scopes[0]
-      $('[data-grammar="source gfm"] /deep/ .editor--private').css 'max-width', editor.getDefaultCharWidth() * atom.config.get(['.gfm.source'],'editor.preferredLineLength')
-      $('[data-grammar="text html mediawiki"] /deep/ .editor--private').css 'max-width', editor.getDefaultCharWidth() * atom.config.get(['.text.html.mediawiki'],'editor.preferredLineLength')
+    typewriterMode = (scope) ->
+      atom.config.set(scope, 'editor.softWrap', true)
+      if atom.views.getView(editor).getAttribute('style') isnt null
+        oldStyle = atom.views.getView(editor).getAttribute('style')
+      else
+        oldStyle = ''
+      newStyle = oldStyle + 'max-width:' + editor.getDefaultCharWidth() * atom.config.get([scope],'editor.preferredLineLength') + 'px;'
+      atom.views.getView(editor).setAttribute('style', newStyle)
+      atom.views.getView(editor).setAttribute('data-typewriter', true)
 
+    if editor isnt undefined # e.g. settings-view
       if editor.getRootScopeDescriptor().scopes[0] is 'source.gfm'
-        atom.views.getView(editor).setAttribute('data-typewriter', true)
+        typewriterMode('source.gfm')
+
       if editor.getRootScopeDescriptor().scopes[0] is 'text.html.mediawiki'
-        atom.views.getView(editor).setAttribute('data-typewriter', true)
+        typewriterMode('text.html.mediawiki')
 
 
   stop: () ->
-    $('[data-grammar="source gfm"] /deep/ .editor--private').css 'max-width', ''
-    $('[data-grammar="text html mediawiki"] /deep/ .editor--private').css 'max-width', ''
+    $ = require 'jquery'
+    $('atom-text-editor:not(.mini)').css 'max-width', ''
