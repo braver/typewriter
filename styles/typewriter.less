@@ -1,23 +1,20 @@
 @import "syntax-variables";
 
-[data-grammar="source gfm"],
-[data-grammar="text html mediawiki"] {
-  &::shadow {
-    .gutter {
-      display: none;
+[data-typewriter="true"]::shadow {
+  .gutter {
+    display: none;
+  }
+  .atom-text-editor {
+    background: @syntax-background-color;
+  }
+  .editor--private {
+    margin: 0 auto;
+    .vertical-scrollbar {
+      opacity: 0;
+      transition: opacity .2s .1s;
     }
-    .atom-text-editor {
-      background: @syntax-background-color;
-    }
-    .editor--private {
-      margin: 0 auto;
-      .vertical-scrollbar {
-        opacity: 0;
-        transition: opacity .2s .1s;
-      }
-      &:hover .vertical-scrollbar {
-        opacity: 1;
-      }
+    &:hover .vertical-scrollbar {
+      opacity: 1;
     }
   }
 }
