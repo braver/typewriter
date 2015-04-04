@@ -5,12 +5,9 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 * Centered layout
 * No gutter
 * No scrollbar (unless you hover over the editor)
-* But with tabs, tree-view etc.
-* Enables soft-wrapping*
+* But keeps the tabs, tree-view, minimap etc.
+* Enables soft-wrapping for gfm and mediawiki
 
-Works automatically with Markdown.
+Works automatically for (GF-)Markdown and MediaWiki files.
 
 ![](https://raw.githubusercontent.com/braver/typewriter/master/resources/screenshot.png)
-
-
-\* I intend to add some flexibility there, but right now it doesn't really make sense without this.
