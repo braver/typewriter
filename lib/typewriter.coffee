@@ -1,10 +1,19 @@
 module.exports =
 
+  config:
+    scopes:
+      description: 'Comma seperated, no spaces. Find the scope for each language in its package.'
+      type: 'string'
+      default: 'source.gfm,text.html.mediawiki'
+
   activate: (state) ->
     Run = require './run'
     Run.start()
 
-    # Listen config changes
+    @configChanged = atom.config.onDidChange 'typewriter.scopes', ->
+      # Reset, start will run again when pane is switched (e.g. away from settings)
+      Run.stop()
+
     @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
       requestAnimationFrame ->
         Run.start()
@@ -13,7 +22,6 @@ module.exports =
       requestAnimationFrame ->
         Run.start()
 
-    # And to tab switching, opening files, etc.
     @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
       requestAnimationFrame ->
         Run.start()
@@ -21,6 +29,7 @@ module.exports =
   deactivate: (state) ->
     Run = require './run'
     Run.stop()
+    @configChanged?.dispose()
     @fontChanged?.dispose()
     @widthChanged?.dispose()
     @paneChanged?.dispose()
