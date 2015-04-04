@@ -2,7 +2,6 @@ module.exports =
 
   start: () ->
     scopes = atom.config.get('typewriter.scopes').split(',')
-    console.log scopes
     editor = atom.workspace.getActiveTextEditor()
 
     typewriterMode = (scope) ->
