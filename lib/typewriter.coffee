@@ -15,16 +15,20 @@ module.exports =
       Run.stop()
 
     @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
-      requestAnimationFrame ->
-        Run.start()
+      Run.start()
 
     @widthChanged = atom.config.onDidChange 'editor.preferredLineLength', ->
-      requestAnimationFrame ->
-        Run.start()
+      Run.start()
 
     @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
-      requestAnimationFrame ->
-        Run.start()
+      Run.start()
+      editor = atom.workspace.getActiveTextEditor()
+      if editor isnt undefined
+        @grammarChange = editor.onDidChangeGrammar -> #needs disposal
+          console.log 1
+          atom.views.getView(editor).setAttribute('style', '')
+          atom.views.getView(editor).setAttribute('data-typewriter', false)
+          Run.start()
 
   deactivate: (state) ->
     Run = require './run'
