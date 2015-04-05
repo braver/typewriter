@@ -1,3 +1,5 @@
+{CompositeDisposable} = require 'atom'
+
 module.exports =
 
   config:
@@ -7,33 +9,33 @@ module.exports =
       default: 'source.gfm,text.html.mediawiki'
 
   activate: (state) ->
+    @disposables = new CompositeDisposable
     Run = require './run'
     Run.start()
 
-    @configChanged = atom.config.onDidChange 'typewriter.scopes', ->
-      # Reset, start will run again when pane is switched (e.g. away from settings)
+    @disposables.add atom.config.onDidChange 'typewriter.scopes', ->
+      # Reset, start() will run again when pane is switched (e.g. away from settings)
       Run.stop()
 
-    @fontChanged = atom.config.onDidChange 'editor.fontSize', ->
+    @disposables.add atom.config.onDidChange 'editor.fontSize', ->
       Run.start()
 
-    @widthChanged = atom.config.onDidChange 'editor.preferredLineLength', ->
+    @disposables.add atom.config.onDidChange 'editor.preferredLineLength', ->
       Run.start()
 
-    @paneChanged = atom.workspace.onDidChangeActivePaneItem ->
+    @disposables.add atom.workspace.onDidChangeActivePaneItem =>
       Run.start()
+      # Listen to grammar changes
       editor = atom.workspace.getActiveTextEditor()
       if editor isnt undefined
-        @grammarChange = editor.onDidChangeGrammar -> #needs disposal
-          console.log 1
+        @disposables.add editor.onDidChangeGrammar ->
+          # Reset first
           atom.views.getView(editor).setAttribute('style', '')
           atom.views.getView(editor).setAttribute('data-typewriter', false)
+          # Then decide if the new grammar needs to be in typewriter mode
           Run.start()
 
   deactivate: (state) ->
     Run = require './run'
     Run.stop()
-    @configChanged?.dispose()
-    @fontChanged?.dispose()
-    @widthChanged?.dispose()
-    @paneChanged?.dispose()
+    @disposables.dispose()
