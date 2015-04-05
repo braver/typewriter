@@ -1,7 +1,7 @@
 module.exports =
 
   start: () ->
-    requestAnimationFrame ->
+    requestAnimationFrame -> # wait for other dom changes
       scopes = atom.config.get('typewriter.scopes').split(',')
       editor = atom.workspace.getActiveTextEditor()
 
