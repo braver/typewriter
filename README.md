@@ -6,8 +6,8 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 * No gutter
 * No scrollbar (unless you hover over the editor)
 * But keeps the tabs, tree-view, minimap etc.
-* Enables soft-wrapping for gfm and mediawiki
+* Enables soft-wrapping for selected scopes
 
-Works automatically for (GF-)Markdown and MediaWiki files.
+Works out of the box for (GF-)Markdown and MediaWiki files. Settings allow you to select the scopes that should trigger typewriter mode.
 
 ![](https://raw.githubusercontent.com/braver/typewriter/master/resources/screenshot.png)
