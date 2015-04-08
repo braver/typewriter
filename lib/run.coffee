@@ -14,10 +14,10 @@ module.exports =
             oldStyle = ''
 
           characterWidth = editor.getDefaultCharWidth()
-          charactersPerLine = atom.config.get([currentScope],'editor.preferredLineLength')
+          charactersPerLine = atom.config.get('editor.preferredLineLength', scope: [currentScope])
           newStyle = oldStyle + 'max-width:' + characterWidth * charactersPerLine + 'px;'
 
-          atom.config.set('.' + currentScope, 'editor.softWrap', true)
+          atom.config.set('editor.softWrap', true, scopeSelector: currentScope)
           atom.views.getView(editor).setAttribute('style', newStyle)
           atom.views.getView(editor).setAttribute('data-typewriter', true)
 
