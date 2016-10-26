@@ -6,7 +6,7 @@ module.exports =
     scopes:
       description: 'Comma seperated, no spaces. Find the scope for each language in its package.'
       type: 'string'
-      default: 'text.md,source.gfm,text.html.mediawiki'
+      default: 'text.md,source.gfm,text.html.mediawiki,text.tex.latex'
 
   activate: (state) ->
     @disposables = new CompositeDisposable
