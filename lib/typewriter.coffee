@@ -3,6 +3,20 @@
 module.exports =
 
   config:
+    enabledForAllScopes:
+      description: 'Ignores file scopes and enables typewriter mode for all files.'
+      type: 'boolean'
+      default: true
+    showTextLeftAligned:
+      description: 'Draw your text left aligned instead of centering text in a column as wide as your preferred line length.'
+      type: 'boolean'
+      default: false
+    showGutter:
+      type: 'boolean'
+      default: false
+    showScrollbar:
+      type: 'boolean'
+      default: false
     scopes:
       description: 'Comma seperated, no spaces. Find the scope for each language in its package.'
       type: 'string'
@@ -13,8 +27,20 @@ module.exports =
     Run = require './run'
     Run.start()
 
+    # Reset, start() will run again when pane is switched (e.g. away from settings)
     @disposables.add atom.config.onDidChange 'typewriter.scopes', ->
-      # Reset, start() will run again when pane is switched (e.g. away from settings)
+      Run.stop()
+
+    @disposables.add atom.config.onDidChange 'typewriter.showTextLeftAligned', ->
+      Run.stop()
+
+    @disposables.add atom.config.onDidChange 'typewriter.showGutter', ->
+      Run.stop()
+
+    @disposables.add atom.config.onDidChange 'typewriter.showScrollbar', ->
+      Run.stop()
+
+    @disposables.add atom.config.onDidChange 'typewriter.enabledForAllScopes', ->
       Run.stop()
 
     @disposables.add atom.config.onDidChange 'editor.fontSize', ->
