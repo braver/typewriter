@@ -5,7 +5,7 @@ module.exports =
       scopes = atom.config.get('typewriter.scopes').split(',')
       showGutter = atom.config.get('typewriter.showGutter')
       showScrollbar = atom.config.get('typewriter.showScrollbar')
-      showTextLeftAligned = atom.config.get('typewriter.showTextLeftAligned')
+      drawTextLeftAligned = atom.config.get('typewriter.drawTextLeftAligned')
       enabledForAllScopes = atom.config.get('typewriter.enabledForAllScopes')
       editor = atom.workspace.getActiveTextEditor()
 
@@ -15,16 +15,14 @@ module.exports =
         if currentScope in scopes or enabledForAllScopes is true
           atom.views.getView(editor).setAttribute('data-typewriter', true)
 
-          if showTextLeftAligned is false
+          if drawTextLeftAligned is false
             characterWidth = editor.getDefaultCharWidth()
             charactersPerLine = atom.config.get('editor.preferredLineLength', scope: [currentScope])
 
-            atom.config.set('editor.softWrap', true, scopeSelector: currentScope)
+            atom.config.set('editor.softWrap', true, scope: [currentScope])
             atom.views.getView(editor).style.maxWidth = characterWidth * (charactersPerLine + 4) + 'px'
             atom.views.getView(editor).style.paddingLeft = characterWidth * 2 + 'px'
             atom.views.getView(editor).style.paddingRight = characterWidth * 2 + 'px'
-
-            console.log(atom.views.getView(editor))
 
           if showGutter is false
             atom.views.getView(editor).setAttribute('data-typewriter-hide-gutter', true)

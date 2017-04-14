@@ -4,11 +4,11 @@ module.exports =
 
   config:
     enabledForAllScopes:
-      description: 'Ignores file scopes and enables typewriter mode for all files.'
+      description: 'Ignore scopes and enable typewriter mode for all files.'
       type: 'boolean'
-      default: true
-    showTextLeftAligned:
-      description: 'Draw your text left aligned instead of centering text in a column as wide as your preferred line length.'
+      default: false
+    drawTextLeftAligned:
+      description: 'Draw text left aligned and don\'t wrap.'
       type: 'boolean'
       default: false
     showGutter:
@@ -31,7 +31,7 @@ module.exports =
     @disposables.add atom.config.onDidChange 'typewriter.scopes', ->
       Run.stop()
 
-    @disposables.add atom.config.onDidChange 'typewriter.showTextLeftAligned', ->
+    @disposables.add atom.config.onDidChange 'typewriter.drawTextLeftAligned', ->
       Run.stop()
 
     @disposables.add atom.config.onDidChange 'typewriter.showGutter', ->
