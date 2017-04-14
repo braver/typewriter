@@ -7,11 +7,18 @@
 [data-typewriter="true"] {
   max-width: 100%;
   margin: 0 auto;
+}
 
+[data-typewriter-hide-gutter="true"] {
   & {
     .gutter {
       display: none;
     }
+  }
+}
+
+[data-typewriter-hide-scrollbar="true"] {
+  & {
     .editor--private {
       .vertical-scrollbar {
         opacity: 0;
