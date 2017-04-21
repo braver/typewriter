@@ -13,4 +13,6 @@ By default it works for (GF-)Markdown, Latex and MediaWiki files. You can change
 
 ![](http://i.imgur.com/AjmeFCh.png)
 
+![](http://i.imgur.com/icQZgXw.png)
+
 Inspired by [Zen](https://atom.io/packages/zen)
