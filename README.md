@@ -15,4 +15,4 @@ Like a miniature version of [Zen](https://atom.io/packages/zen), this package im
 
 Works out of the box for (GF-)Markdown, Latex and MediaWiki files. Settings allow you to select the scopes that should trigger typewriter mode.
 
-![](https://raw.githubusercontent.com/braver/typewriter/master/resources/screenshot.png)
+![](http://i.imgur.com/AjmeFCh.png)
