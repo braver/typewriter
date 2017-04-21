@@ -5,7 +5,7 @@
 * Centered layout
 * No gutter
 * No scrollbar (unless you hover over the editor)
-* But keeps the tabs, tree-view, minimap etc
+* Keeps tabs, tree-view, minimap, and etc.
 * Enables soft-wrapping for selected scopes
 * Enable for all file scopes or for the scopes you select
 
