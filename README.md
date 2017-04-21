@@ -1,6 +1,6 @@
 # typewriter
 
-## Improves the writing experience in Atom:
+### Improves the writing experience in Atom.
 
 * Centered layout
 * No gutter
