@@ -19,7 +19,7 @@ module.exports =
             characterWidth = editor.getDefaultCharWidth()
             charactersPerLine = atom.config.get('editor.preferredLineLength', scope: [currentScope])
 
-            atom.config.set('editor.softWrap', true, scope: [currentScope])
+            editor.setSoftWrapped(true)
             atom.views.getView(editor).style.maxWidth = characterWidth * (charactersPerLine + 4) + 'px'
             atom.views.getView(editor).style.paddingLeft = characterWidth * 2 + 'px'
             atom.views.getView(editor).style.paddingRight = characterWidth * 2 + 'px'
