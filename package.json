@@ -1,7 +1,7 @@
 {
   "name": "typewriter",
   "main": "./lib/typewriter",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "description": "A better writing experience for Atom",
   "repository": "https://github.com/braver/typewriter",
   "license": "MIT",
